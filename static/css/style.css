@@ -1,0 +1,119 @@
+/*
+  File: static/css/style.css
+  Layout and dashboard
+  Purpose: The visual style for all the caseflow pages.
+*/
+
+:root {
+  --navy: #14284b;
+  --teal: #17878c;
+  --teal-dark: #106a6e;
+  --teal-light: #e4f3f3;
+  --white: #ffffff;
+  --page: #f3f6f9;
+  --text: #1b2533;
+  --muted: #5d6b7c;
+  --line: #d8e0e8;
+  --done: #2f8f5b;
+  --not-done: #d0453f;
+
+  /* All the font sizes. */
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-xxl: 2.25rem;
+
+  /* Spacing scale: margins and padding use these steps only. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+  font-size: var(--text-base);
+  color: var(--text);
+  background: var(--page);
+}
+
+h1 { font-size: var(--text-xxl); color: var(--navy); font-weight: bold; }
+h2 { font-size: var(--text-lg); color: var(--navy); font-weight: bold; }
+
+/* Keyboard users must always see where they are on the page. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+tr:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* ---------- Navbar (same on every page) ---------- */
+.cf-navbar { background: var(--navy); }
+.cf-navbar .navbar-brand { color: var(--white); font-weight: bold; }
+.cf-navbar .nav-link { color: rgba(255, 255, 255, 0.8); }
+.cf-navbar .nav-link:hover,
+.cf-navbar .nav-link.active { color: var(--white); text-decoration: underline; }
+
+/* ---------- Buttons ---------- */
+.btn-teal { background: var(--teal); border-color: var(--teal); color: var(--white); }
+.btn-teal:hover { background: var(--teal-dark); border-color: var(--teal-dark); color: var(--white); }
+
+/* ---------- Summary bar ---------- */
+/* Three cards side by side on a laptop, stacked on a phone. */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+@media (max-width: 576px) {
+  .summary { grid-template-columns: 1fr; }
+}
+.summary-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--navy);
+  border-radius: 6px;
+  padding: var(--space-3);
+}
+.summary-card .label { font-size: var(--text-sm); color: var(--muted); }
+.summary-card .value { font-size: var(--text-xl); font-weight: bold; color: var(--navy); }
+
+/* ---------- Patient table ---------- */
+/* The wrapper scrolls sideways on small screens so the page itself never does. */
+.table-box {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+.patient-table { margin-bottom: 0; min-width: 640px; }
+.patient-table thead th { background: var(--navy); color: var(--white); font-weight: normal; }
+.patient-table tbody tr { cursor: pointer; }
+.patient-table tbody tr:hover td { background: var(--teal-light); }
+
+/* ---------- Progress blocks ---------- */
+/* One block per pipeline stage: green when done, red when not done. */
+.progress-blocks { display: inline-flex; gap: 3px; }
+.block { display: inline-block; width: 20px; height: 12px; border-radius: 2px; }
+.block.done { background: var(--done); }
+.block.not-done { background: var(--not-done); }
+
+/* ---------- Status badges ---------- */
+.badge-completed { background: var(--done); }
+.badge-progress { background: var(--navy); }
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  background: var(--white);
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  padding: var(--space-5) var(--space-3);
+  text-align: center;
+  color: var(--muted);
+}
