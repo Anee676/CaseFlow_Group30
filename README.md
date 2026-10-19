@@ -33,3 +33,4 @@ Record here any AI help used, as the BFB321 rules require.
 - Section 1: the first draft of the stylesheet, sample data, dashboard page and script was generated with Claude (Anthropic) from our planning notes and the development guide. Changes made after that are in the commit history.
 
 - Section 2: the first draft of the patient form, upload page, their scripts and forms.css was generated with Claude (Anthropic) from our planning notes and the development guide. Changes made after that are in the commit history.
+
