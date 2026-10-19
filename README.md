@@ -19,7 +19,7 @@ python -m pytest
 | Section | Student | Files |
 |---|---|---|
 | 1. Layout and dashboard | Anée van Eeden | `README.md`, `static/css/style.css`, `static/js/sample-data.js`, `index.html`, `static/js/dashboard.js` |
-| 2. Patient and upload forms | Beaulah Shaw | `patient.html`, `static/js/patient.js`, `uploads.html`, `static/js/uploads.js` |
+| 2. Patient and upload forms | Beaulah Shaw | `patient.html`, `static/js/patient.js`, `uploads.html`, `static/js/uploads.js`, `static/css/forms.css` | 
 | 3. Model and impact page | Talia van Sittert | `models/capacity.py`, `tests/test_capacity.py`, `impact.html` |
 
 ## Shared style
@@ -31,3 +31,5 @@ Every page links `static/css/style.css` and copies the navbar from `index.html`.
 Record here any AI help used, as the BFB321 rules require.
 
 - Section 1: the first draft of the stylesheet, sample data, dashboard page and script was generated with Claude (Anthropic) from our planning notes and the development guide. Changes made after that are in the commit history.
+
+- Section 2: the first draft of the patient form, upload page, their scripts and forms.css was generated with Claude (Anthropic) from our planning notes and the development guide. Changes made after that are in the commit history.
