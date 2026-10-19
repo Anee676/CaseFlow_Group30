@@ -1,0 +1,73 @@
+/*
+  File:    static/css/forms.css
+  Section: 2 (patient and upload forms)
+  Owner:   Beaulah Shaw
+  Drafted: with AI assistance (Claude). See README, AI assistance.
+  Purpose: Extra styles for the two form pages. Colours and spacing come
+           from the variables in style.css (section 1), so the look matches.
+*/
+
+/* White card that holds a group of form fields. */
+.form-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+/* The module side panel stays in view while the user scrolls on a laptop. */
+.module-panel {
+  position: sticky;
+  top: var(--space-3);
+}
+
+/* Each ticked module gets its own card with a teal edge. */
+.module-card {
+  border-left: 4px solid var(--teal);
+}
+
+/* Buttons at the bottom of a form: Previous on the left, the rest on the right. */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-3);
+}
+
+/* ---------- Upload rows ---------- */
+/* Red edge while the file is missing, green once a file is chosen. */
+.upload-row {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: end;
+  padding: var(--space-3);
+  margin-bottom: var(--space-2);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--not-done);
+  border-radius: 6px;
+  background: var(--white);
+}
+.upload-row.has-file {
+  border-left-color: var(--done);
+}
+.upload-status {
+  font-size: var(--text-sm);
+  font-weight: bold;
+  color: var(--not-done);
+}
+.upload-row.has-file .upload-status {
+  color: var(--done);
+}
+
+/* On a phone the three parts of a row stack on top of each other. */
+@media (max-width: 640px) {
+  .upload-row { grid-template-columns: 1fr; }
+}
+
+/* Outline buttons in navy so they match the site instead of Bootstrap blue. */
+.btn-outline-navy { border-color: var(--navy); color: var(--navy); }
+.btn-outline-navy:hover { background: var(--navy); color: var(--white); }

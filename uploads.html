@@ -1,0 +1,72 @@
+<!doctype html>
+<!--
+  File:    uploads.html
+  Section: 2 (patient and upload forms)
+  Owner:   Beaulah Shaw
+  Drafted: with AI assistance (Claude). See README, AI assistance.
+  Purpose: Track which specialist reports have arrived for a patient.
+           One row per specialist. A row is red until its file is chosen.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Upload reports | CaseFlow</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/forms.css">
+</head>
+<body>
+
+  <!-- Same navbar as index.html (section 1). -->
+  <nav class="navbar navbar-expand cf-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">CaseFlow</a>
+      <div class="navbar-nav">
+        <a class="nav-link" href="index.html">Patients</a>
+        <a class="nav-link" href="impact.html">Impact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+      <div>
+        <h1>Upload reports</h1>
+        <p class="text-muted mb-0" id="patient-label">New patient</p>
+      </div>
+      <a class="btn btn-outline-secondary btn-sm" href="index.html">Home</a>
+    </div>
+
+    <div id="upload-message" role="status" aria-live="polite"></div>
+
+    <section class="form-card">
+      <div class="d-flex flex-wrap justify-content-between align-items-baseline gap-2 mb-3">
+        <h2 class="mb-0">Specialist reports</h2>
+        <span class="small text-muted" id="upload-count">0 of 0 received</span>
+      </div>
+
+      <!-- uploads.js adds one row per specialist here. -->
+      <div id="upload-rows"></div>
+
+      <button class="btn btn-outline-navy btn-sm" type="button" id="add-row-btn">+ Add specialist</button>
+    </section>
+
+    <p class="small text-muted">
+      Accepted files: PDF, DOC, DOCX. In this version files are not stored anywhere.
+      The page only records which reports have been chosen.
+    </p>
+
+    <div class="form-actions">
+      <a class="btn btn-outline-secondary" id="previous-btn" href="patient.html">Previous</a>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-outline-navy" type="button" id="save-btn">Save</button>
+        <button class="btn btn-teal" type="button" id="complete-btn">Mark complete</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="static/js/sample-data.js"></script>
+  <script src="static/js/uploads.js"></script>
+</body>
+</html>
