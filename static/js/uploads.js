@@ -1,8 +1,6 @@
 /*
   File:    static/js/uploads.js
-  Section: 2 (patient and upload forms)
-  Owner:   Beaulah Shaw
-  Drafted: with AI assistance (Claude). See README, AI assistance.
+  Section: 2 
   Purpose: Runs the upload page: adds and removes specialist rows, colours
            each row by whether its file is chosen, and refuses Mark complete
            while any report is missing.

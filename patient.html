@@ -1,11 +1,9 @@
 <!doctype html>
 <!--
   File:    patient.html
-  Section: 2 (patient and upload forms)
-  Owner:   Beaulah Shaw
-  Drafted: with AI assistance (Claude). See README, AI assistance.
-  Purpose: Add a new patient or edit an existing one. The therapist fills in
-           general information and ticks only the report modules that apply.
+  Section: 2 
+  Patient and upload forms: Add a new patient or edit an existing one. The therapist fills in
+           general information and ticks only the report modules that apply to generate those templates in the report.
 -->
 <html lang="en">
 <head>
@@ -18,7 +16,6 @@
 </head>
 <body>
 
-  <!-- Same navbar as index.html (section 1). -->
   <nav class="navbar navbar-expand cf-navbar">
     <div class="container">
       <a class="navbar-brand" href="index.html">CaseFlow</a>
@@ -35,7 +32,6 @@
       <a class="btn btn-outline-secondary btn-sm" href="index.html">Home</a>
     </div>
 
-    <!-- Messages for the whole form appear here. aria-live makes screen readers read them out. -->
     <div id="form-message" role="status" aria-live="polite"></div>
 
     <form id="patient-form" novalidate>

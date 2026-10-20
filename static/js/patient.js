@@ -1,8 +1,6 @@
 /*
   File:    static/js/patient.js
-  Section: 2 (patient and upload forms)
-  Owner:   Beaulah Shaw
-  Drafted: with AI assistance (Claude). See README, AI assistance.
+  Section: 2 
   Purpose: Runs the patient form: builds the module side panel, shows and
            hides each module's fields, and checks the form before it moves on.
            There is no database in the Semester Project, so Save only checks

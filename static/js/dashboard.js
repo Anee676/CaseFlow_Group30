@@ -1,8 +1,6 @@
 /*
   File: static/js/dashboard.js
-  Section: 1 (layout and dashboard)
-  Owner: Anée van Eeden
-  Drafted: with AI assistance (Claude). See README, AI assistance.
+  Section: 1 
   Purpose: Builds the patient database page from sample-data.js: the summary
            counts, the sorted patient table and the search filter.
 */

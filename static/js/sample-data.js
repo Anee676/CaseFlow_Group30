@@ -1,8 +1,6 @@
 /*
   File: static/js/sample-data.js
-  Section: 1 (layout and dashboard)
-  Owner: Anée van Eeden
-  Drafted: with AI assistance (Claude). See README, AI assistance.
+  Section: 1 
   Purpose: Invented patients for the demo. There is no database in the
            Semester Project, so every page reads its patients from here.
            No real patient data may ever be added to this file (POPIA).
