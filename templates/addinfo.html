@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient | CaseFlow</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar with Right Navigation Links -->
+  <header class="navbar">
+    <a href="index.html" class="brand-link">CaseFlow</a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Patients</a>
+      <a href="#" class="nav-link">Impact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    <!-- Top Header Bar -->
+    <div class="page-header">
+      <h1 class="page-title">Add a new patient</h1>
+      <a href="index.html" class="btn">Home</a>
+    </div>
+
+    <!-- Main Two-Column Layout -->
+    <div class="cards-layout">
+      
+      <!-- Left Card: General Information -->
+      <div class="form-card">
+        <h2 class="section-title">General information</h2>
+        
+        <div class="fields-grid">
+          <div class="form-group">
+            <label for="firstName">Name</label>
+            <input type="text" id="firstName" name="firstName" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="surname">Surname</label>
+            <input type="text" id="surname" name="surname" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="idNumber">ID number</label>
+            <input type="text" id="idNumber" name="idNumber" class="form-control">
+            <span class="field-hint">13 digits, no spaces.</span>
+          </div>
+
+          <div class="form-group">
+            <label>Gender</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="gender" value="Male"> Male
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="gender" value="Female"> Female
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfInjury">Date of injury</label>
+            <input type="date" id="dateOfInjury" name="dateOfInjury" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Card: Report Modules -->
+      <div class="form-card">
+        <h2 class="section-title">Report modules</h2>
+        <p class="section-subtext">Tick what applies to this patient.</p>
+        
+        <div class="checkbox-list">
+          <label class="checkbox-label">
+            <input type="checkbox"> Accident details
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox"> Scans & imaging
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox"> Ankle
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox"> Knee
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox"> Hip
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox"> Arm
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox"> Wrist
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Module Details Section -->
+    <div class="module-details-section">
+      <h2 class="section-title">Module details</h2>
+      <p class="section-subtext">
+        Tick the modules that apply in the side panel. Each ticked module opens its own fields here. Modules that are not ticked are left out of the report.
+      </p>
+
+      <!-- Module Cards Area (Hard-coded for static viewing) -->
+      <div class="modules-cards-container">
+        <!-- Module cards will appear here when checkboxes are selected -->
+      </div>
+
+      <!-- Action Buttons Toolbar -->
+      <div class="actions-toolbar">
+        <button type="button" class="btn">Previous</button>
+        <div class="actions-right">
+          <button type="button" class="btn">Save</button>
+          <button type="button" class="btn">Mark complete</button>
+          <button type="button" class="btn btn-teal">Next</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

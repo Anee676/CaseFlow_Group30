@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Report | Caseflow</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<!--Top navigation bar-->
+<header>
+    <a href="index.html" class="brand-link">Caseflow</a>
+    <nav class="nav-links">
+        <a href="index.html" class="nav-link">Patients</a>
+        <a href="#" class="nav-link">Impact</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <!--Header Title and home button-->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Patient Report</h1>
+            <p class="section-subtext" style="margin-top: 4px;margin-bottom: 0;">Pieter Botha (CF-0004)</p>
+        </div>
+        <a href="index.html" class="btn">Home</a>
+    </div>
+
+    <!-- Main container card-->
+    <div class="form-card">
+        <div class="card-header-row">
+            <h2 class="section-title" style="margin-bottom: 0;">Specialist reports</h2>
+            <span class="status-counter">0 of 3 received</span>
+        </div>
+
+        <!-- Large multi-line textbox for report output-->
+        <div class="form-group" style="margin-top: 20px;">
+            <label for="reportContent" class="textarea-label">Report Notes & Content</label>
+            <textarea
+                id="reportContent"
+                name="reportContent"
+                class="form-control large-textarea"
+                placeholder="Type or paste formatted multi-line report details, 
+                specialist evaluations, and observations here..."></textarea>
+        </div>
+    </div>
+
+    <!--Footer note-->
+    <p class="section-subtext" style="margin-top: -8px">
+        The generated report can be finalised as is, or edited manually first.
+    </p>
+</main>
+</body>
+</html>
