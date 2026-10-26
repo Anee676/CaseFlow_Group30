@@ -1,4 +1,44 @@
+#///////////////////////////////////////////////////////////////////////////////////////////////
+# MOCK DATA
+#///////////////////////////////////////////////////////////////////////////////////////////////
+#The mock data that will be used to demonstrate the python code's functionality.
+#The existing "database" of patients is in the form of a list of dictionaries.
 
+#The four stages of writing a report: add patient to database, save your evaluation, generate report, finalise report
+
+#Declare some sample data in the format of a list of dictionaries
+patients = [
+    {"6237732712998" : "1", "name": "Beaulah", "surname": "Shaw", "stageDone": 4, "Ankle": True, "Knee": False, "Hip": True, "Arm": False, "Wrist": False},
+    {"1153060156238" : "2", "name": "Anee", "surname": "van Eeden", "stageDone": 3, "Ankle": True, "Knee": False, "Hip": True, "Arm": False, "Wrist": False},
+    {"8758944319328" : "3", "name": "Pieter", "surname": "Botha", "stageDone": 2, "Ankle": True, "Knee": False, "Hip": True, "Arm": False, "Wrist": False},
+    {"5169484183376" : "4", "name": "Luka", "surname": "Wood", "stageDone": 1, "Ankle": True, "Knee": False, "Hip": True, "Arm": False, "Wrist": False},
+    {"7493595926423" : "5", "name": "Dean", "surname": "Zartmann", "stageDone": 0, "Ankle": True, "Knee": False, "Hip": True, "Arm": False, "Wrist": False},
+    {"9993792601664" : "6", "name": "Carine", "surname": "Pretorius", "stageDone": 4, "Ankle": True, "Knee": False, "Hip": True, "Arm": False, "Wrist": False},
+    {"0005060772189" : "7", "name": "Chardi", "surname": "Snyman", "stageDone": 2, "Ankle": True, "Knee": False, "Hip": True, "Arm": False, "Wrist": False}
+]
+
+#An empty list of dictionaries for the reports that will be generated.
+reports = []
+
+#The new patient's details. The notes are kept very short for demonstration's sake, but it will usually have more content
+patientName = "Anica"
+patientSurname = "Ferreira"
+patientID = "1423576436475"
+bAnkle = True
+bKnee = False
+bHip = True
+bArm = False
+bWrist = False
+sAnkleSeverity = "Mild"
+sKneeSeverity = ""
+sHipSeverity = "Moderate"
+sArmSeverity = ""
+sWristSeverity = ""
+sAnkleNotes = "Patient has mild ankle pain. The injury might grow worse if not treated."
+sKneeNotes = ""
+sHipNotes = "Patient has moderate hip pain. The cause is still unclear."
+sArmNotes = ""
+sWristNotes = ""
 
 #///////////////////////////////////////////////////////////////////////////////////
 #Do the following calculations to give the therapist an overview of work to be done, displayed on home page
@@ -39,8 +79,8 @@ def add_patient(patients, patientID, patientName, patientSurname, bAnkle, bKnee,
     #Database for patients gets a new record, with id, name, surname, booleans for the modules,
     # and stageDone = 1.
     patients.append({"id": patientID, "name": patientName, "surname": patientSurname, "stageDone": 1, "Ankle": bAnkle, "Knee": bKnee, "Hip": bHip, "Arm": bArm, "Wrist": bWrist})
-    calc_total()
-    calcInProgress()
+    calc_total(patients)
+    calcInProgress(patients)
 
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,7 +166,7 @@ def reportOutput(patients, reports, patientID):
 # WHEN A REPORT IS FINALISED
 #/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-def finalReport(patients, patientID):
+def finalReport(patients, reports, patientID):
     # 1. Find the patient in the list
     patient = next((p for p in patients if p.get("id") == patientID), None)
             
@@ -134,10 +174,10 @@ def finalReport(patients, patientID):
     if patient and patient.get("stageDone") == 3:
         patient["stageDone"] += 1
         #Do the relevant calculations again
-    calcInProgress()
-    calcCompleted()
+    calcInProgress(patients)
+    calcCompleted(patients)
     #return the report again to show what has been finalised
-    return(reportOutput(patientID))
+    return(reportOutput(patients, reports, patientID))
     
 
 

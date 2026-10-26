@@ -1,17 +1,56 @@
 # CaseFlow (BFB321 Semester Project, group 30)
 
-CaseFlow is a web tool for the medico-legal reporting workflow at an occupational therapy practice. It replaces a "delete what doesn't apply" report template with modules the therapist ticks, and it shows where every patient's report stands.
+CaseFlow is a web tool to simplify the writing of medical reports by a speach therapist. It creates sections for 
+all the relevat information and formats it in a string to be turned into a report. This process was much simplified 
+for the sake of this project.
 
-This is the Semester Project submission. It covers the two semester deliverables from the BFB321 development guide: the frontend build and the supply chain model.
+# Student Numbers and Names:
+Anée van Eeden, u24585018
+Beaulah Shaw, u24095398
+Talia van Sittert, u23526531
 
 ## How to open it
 
-Open the folder in VS Code and open `index.html` in a browser. The Live Server extension works too. There is no login, server or database in this version. Patients come from `static/js/sample-data.js` and are invented.
+Open the folder in VS Code and open the html pages in a browser. They will be properly linked to each other in 
+the final submission
+It is important that the functions, excluding the calculations, are executed in order to ensure they work correctly.
+In the final submission, more validation will be set in place to make the code more robust.
 
-To run the model tests (section 3):
+The three functions calcTotal, calcInProgress and calcCompleted can be executed at any point and are there to give 
+the user an overview of the patients in the database.
+Then, the following functions are executed in order to create a new report:
+1. addPatient, 
+2. finaliseEval, 
+3. reportOutput, 
+4. finalReport
+
+In the main python model, the following variables have been created to demonstrate the creation of a report:
+
+patientName = "Anica"
+patientSurname = "Ferreira"
+patientID = "1423576436475"
+bAnkle = True
+bKnee = False
+bHip = True
+bArm = False
+bWrist = False
+sAnkleSeverity = "Mild"
+sKneeSeverity = ""
+sHipSeverity = "Moderate"
+sArmSeverity = ""
+sWristSeverity = ""
+sAnkleNotes = "Patient has mild ankle pain. The injury might grow worse if not treated."
+sKneeNotes = ""
+sHipNotes = "Patient has moderate hip pain. The cause is still unclear."
+sArmNotes = ""
+sWristNotes = ""
+
+
+To run the model tests:
 
 ```
-python -m pytest
+a pytest file was created with some tests, but it returned an error and I (Anée) could not fix it. There is mock data
+provided in the main python model that can be used in something like jupyter notebook to test the functions.
 ```
 
 ## Sections
@@ -24,13 +63,14 @@ python -m pytest
 
 ## Shared style
 
-Every page links `static/css/style.css` and copies the navbar from `index.html`. Font is Times New Roman. Colours are navy `#14284b`, teal `#17878c` and white. Use the colour, font-size and spacing variables at the top of `style.css` rather than new values.
+Every page links `static/css/style.css` and copies the navbar from `index.html`. Font is Times New Roman. Colours are navy `#14284b`, teal `#17878c` and white.
 
 ## AI assistance
 
-Record here any AI help used, as the BFB321 rules require.
+AI help used:
 
-- Section 1: the first draft of the stylesheet, sample data, dashboard page and script was generated with Claude (Anthropic) from our planning notes and the development guide. Changes made after that are in the commit history.
+Claude was used to create the first drafts of the html user interfaces and created javascript code for the functionality.
+This Javascript was then simplified a lot and translated to python code, which we, the students, did ourselves.
 
-- Section 2: the first draft of the patient form, upload page, their scripts and forms.css was generated with Claude (Anthropic) from our planning notes and the development guide. Changes made after that are in the commit history.
+
 
