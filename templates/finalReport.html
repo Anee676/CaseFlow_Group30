@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Report | Caseflow</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <!--Top navigation bar-->
-<header>
-    <a href="index.html" class="brand-link">Caseflow</a>
-    <nav class="nav-links">
-        <a href="index.html" class="nav-link">Patients</a>
-        <a href="#" class="nav-link">Impact</a>
-    </nav>
+<header class="navbar">
+    <a href="{{ url_for('index', status='all') }}" class="brand-link">Caseflow Homepage</a>
 </header>
+
+{% with messages =
+get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<div class="flash {{ category }}">{{ message }}</div>
+{% endfor %}
+{% endwith %}
 
 <main class="container">
 
@@ -23,34 +26,42 @@
     <div class="page-header">
         <div>
             <h1 class="page-title">Patient Report</h1>
-            <p class="section-subtext" style="margin-top: 4px;margin-bottom: 0;">Pieter Botha (CF-0004)</p>
+            <p class="section-subtext" style="margin-top: 4px;margin-bottom: 0;">{{case.Patient_name}} {{case.Patient_surname}}</p>
         </div>
-        <a href="index.html" class="btn">Home</a>
     </div>
+
+    <form method="post" action="{{ url_for('final_report', case_id=case.Case_id) }}">
 
     <!-- Main container card-->
     <div class="form-card">
         <div class="card-header-row">
-            <h2 class="section-title" style="margin-bottom: 0;">Specialist reports</h2>
-            <span class="status-counter">0 of 3 received</span>
+            <h2 class="section-title" style="margin-bottom: 0;">Final Report Draft</h2>
         </div>
 
         <!-- Large multi-line textbox for report output-->
         <div class="form-group" style="margin-top: 20px;">
-            <label for="reportContent" class="textarea-label">Report Notes & Content</label>
-            <textarea
-                id="reportContent"
-                name="reportContent"
-                class="form-control large-textarea"
-                placeholder="Type or paste formatted multi-line report details, 
-                specialist evaluations, and observations here..."></textarea>
+            <label for="reportContent" class="textarea-label">The generated report can be finalised as is, or edited manually first.</label>
+            <textarea name="report_string" rows="15" class="form-control"
+            {{ 'readonly' if finalised }}>{{ case.ReportString or '' }}</textarea>
         </div>
     </div>
 
-    <!--Footer note-->
-    <p class="section-subtext" style="margin-top: -8px">
-        The generated report can be finalised as is, or edited manually first.
-    </p>
+
+    <!-- Action Buttons Toolbar -->
+      <div class="actions-toolbar-report">
+        <a href="{{ url_for('case_details', case_id=case.Case_id) }}" class="btn">Previous</a>
+        <div class="actions-right">
+            {% if not finalised %}
+                <button type="submit" name="action" value="save" class="btn-teal">Save</button>
+                <button type="submit" name="action" value="finalise" class="btn">Finalise report</button>
+            {% else %}
+                <p>This report has been finalised and can no longer be edited.</p>
+            {% endif %}
+        </div>
+      </div>
+
+    </form>
+
 </main>
 </body>
 </html>

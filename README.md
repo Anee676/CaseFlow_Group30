@@ -70,7 +70,7 @@ Every page links `static/css/style.css` and copies the navbar from `index.html`.
 AI help used:
 
 Claude was used to create the first drafts of the html user interfaces and created javascript code for the functionality.
-This Javascript was then simplified a lot and translated to python code, which we, the students, did ourselves.
+This Javascript was then simplified a lot and translated to python code, which we, the students, did ourselves. AI was also used to create some records for the database.
 
 
 

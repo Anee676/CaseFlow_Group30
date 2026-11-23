@@ -3,31 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patient | CaseFlow</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <title>CaseDetails | CaseFlow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
   <!-- Navigation Bar with Right Navigation Links -->
   <header class="navbar">
-    <a href="index.html" class="brand-link">CaseFlow</a>
-    <nav class="nav-links">
-      <a href="index.html" class="nav-link">Patients</a>
-      <a href="#" class="nav-link">Impact</a>
-    </nav>
+    <a href="{{ url_for('index', status='all') }}" class="brand-link">Caseflow Homepage</a>
   </header>
 
   <main class="container">
-    
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+
     <!-- Top Header Bar -->
     <div class="page-header">
-      <h1 class="page-title">Add a new patient</h1>
-      <a href="index.html" class="btn">Home</a>
+      <h1 class="page-title">Manage Case Details</h1>
     </div>
+
+    <form id="delete-form" method="post"
+      action="{{ url_for('case_delete', case_id=case.Case_id) }}"
+      onsubmit='return confirm("Delete this case and its report? This cannot be undone.");'></form>
+
+    <form method="post" action="{{ url_for('case_details', case_id=case.Case_id) }}">
+    <fieldset style="border:none; padding:0; margin:0;" {{ 'disabled' if finalised }}>
 
     <!-- Main Two-Column Layout -->
     <div class="cards-layout">
       
+
       <!-- Left Card: General Information -->
       <div class="form-card">
         <h2 class="section-title">General information</h2>
@@ -35,35 +44,27 @@
         <div class="fields-grid">
           <div class="form-group">
             <label for="firstName">Name</label>
-            <input type="text" id="firstName" name="firstName" class="form-control">
+            <input type="text" id="firstName" name="firstName" class="form-control" value="{{ case.Patient_name or '' }}">
           </div>
 
           <div class="form-group">
             <label for="surname">Surname</label>
-            <input type="text" id="surname" name="surname" class="form-control">
+            <input type="text" id="surname" name="surname" class="form-control" value="{{ case.Patient_surname or '' }}">
           </div>
 
           <div class="form-group">
-            <label for="idNumber">ID number</label>
-            <input type="text" id="idNumber" name="idNumber" class="form-control">
+            <label for="idNumber">ID Number</label>
+            <input type="text" id="idNumber" name="idNumber" class="form-control" value="{{ case.Patient_id or '' }}" {{ 'readonly' if patient_locked }}>
             <span class="field-hint">13 digits, no spaces.</span>
           </div>
 
           <div class="form-group">
-            <label>Gender</label>
-            <div class="radio-group">
-              <label class="radio-label">
-                <input type="radio" name="gender" value="Male"> Male
-              </label>
-              <label class="radio-label">
-                <input type="radio" name="gender" value="Female"> Female
-              </label>
-            </div>
+            <label for="dateOfInjury">Date of Injury</label>
+            <input type="date" id="dateOfInjury" name="dateOfInjury" class="form-control" value="{{ case.Injury_date or '' }}">
           </div>
-
           <div class="form-group">
-            <label for="dateOfInjury">Date of injury</label>
-            <input type="date" id="dateOfInjury" name="dateOfInjury" class="form-control">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="{{ case.Patient_DoB or '' }}">
           </div>
         </div>
       </div>
@@ -73,32 +74,29 @@
         <h2 class="section-title">Report modules</h2>
         <p class="section-subtext">Tick what applies to this patient.</p>
         
-        <div class="checkbox-list">
+        <div class="checkbox-list">         
           <label class="checkbox-label">
-            <input type="checkbox"> Accident details
+            <input type="checkbox" id="chk-ankle" name="ankle" {{ 'checked' if case.Ankle_injury }}> Ankle
           </label>
           <label class="checkbox-label">
-            <input type="checkbox"> Scans & imaging
+            <input type="checkbox" id="chk-knee" name="knee" {{ 'checked' if case.Knee_injury }}> Knee
           </label>
           <label class="checkbox-label">
-            <input type="checkbox"> Ankle
+            <input type="checkbox" id="chk-hip" name="hip" {{ 'checked' if case.Hip_injury }}> Hip
           </label>
           <label class="checkbox-label">
-            <input type="checkbox"> Knee
+            <input type="checkbox" id="chk-arm" name="arm" {{ 'checked' if case.Arm_injury }}> Arm
           </label>
           <label class="checkbox-label">
-            <input type="checkbox"> Hip
-          </label>
-          <label class="checkbox-label">
-            <input type="checkbox"> Arm
-          </label>
-          <label class="checkbox-label">
-            <input type="checkbox"> Wrist
+            <input type="checkbox" id="chk-wrist" name="wrist" {{ 'checked' if case.Wrist_injury }}> Wrist
           </label>
         </div>
+        
       </div>
 
+    
     </div>
+
 
     <!-- Bottom Module Details Section -->
     <div class="module-details-section">
@@ -107,22 +105,71 @@
         Tick the modules that apply in the side panel. Each ticked module opens its own fields here. Modules that are not ticked are left out of the report.
       </p>
 
-      <!-- Module Cards Area (Hard-coded for static viewing) -->
       <div class="modules-cards-container">
-        <!-- Module cards will appear here when checkboxes are selected -->
+
+        <div class="form-card" id="mod-accident">
+          <h3 class="section-title">Accident details</h3>
+          <textarea name="accident_details" class="form-control">{{ case.Accident_Details or '' }}</textarea>
+        </div>
+
+        <div class="form-card" id="mod-scans">
+          <h3 class="section-title">Scans & imaging</h3>
+          <textarea name="scans_imagery" class="form-control">{{ case.Scans_Imagery or '' }}</textarea>
+        </div>
+
+        <div class="form-card module-card" id="mod-ankle">
+          <h3 class="section-title">Ankle</h3>
+          <textarea name="ankle_details" class="form-control">{{ case.Ankle_details or '' }}</textarea>
+        </div>
+
+        <div class="form-card module-card" id="mod-knee">
+          <h3 class="section-title">Knee</h3>
+          <textarea name="knee_details" class="form-control">{{ case.Knee_details or '' }}</textarea>
+        </div>
+
+        <div class="form-card module-card" id="mod-hip">
+          <h3 class="section-title">Hip</h3>
+          <textarea name="hip_details" class="form-control">{{ case.Hip_details or '' }}</textarea>
+        </div>
+
+        <div class="form-card module-card" id="mod-arm">
+          <h3 class="section-title">Arm</h3>
+          <textarea name="arm_details" class="form-control">{{ case.Arm_details or '' }}</textarea>
+        </div>
+
+        <div class="form-card module-card" id="mod-wrist">
+          <h3 class="section-title">Wrist</h3>
+          <textarea name="wrist_details" class="form-control">{{ case.Wrist_details or '' }}</textarea>
+        </div>
+
+
+      </fieldset>
+
       </div>
 
       <!-- Action Buttons Toolbar -->
       <div class="actions-toolbar">
-        <button type="button" class="btn">Previous</button>
+
+        <a href="{{ url_for('index', status='all') }}" class="btn">Previous</a>
+        <button type="submit" form="delete-form" class="btn">Delete</button>
         <div class="actions-right">
-          <button type="button" class="btn">Save</button>
-          <button type="button" class="btn">Mark complete</button>
-          <button type="button" class="btn btn-teal">Next</button>
+
+            {% if finalised %}
+              <p>This report is finalised. The details are view only.</p>
+              <a href="{{ url_for('final_report', case_id=case.Case_id) }}" class="btn-teal">Next</a>
+            {% else %}
+              <button type="submit" name="action" value="save" class="btn-teal">Save</button>
+              <button type="submit" name="action" value="next" class="btn-teal">Mark complete</button>
+              <a href="{{ url_for('final_report', case_id=case.Case_id) }}" class="btn-teal">Next</a>
+            {% endif %}
         </div>
+
       </div>
+
     </div>
 
+  </form>
+  
   </main>
 
 </body>

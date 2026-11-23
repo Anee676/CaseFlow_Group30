@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CaseFlow - Patient Database</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
@@ -16,6 +17,12 @@
 
  <main class="container">
     
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
+
     <!-- Title, the button to add a new patient -->
      <div class="header-bar">
         <div>
@@ -23,24 +30,32 @@
             <p>Incomplete records are listed first </p>
         </div>
         <!-- Button that leads to the screen to add a patient-->
-        <a href="/add-patient" class="btn-add">+Add new patient</a>
+        <form method="post" action="{{ url_for('case_new') }}">
+            <button type="submit" class="btn-add">+Add new patient</button>
+        </form>
      </div>
 
      <!-- Summarising statistics -->
           <!-- NOTE: Placeholder value is displayed for now -->
      <section class="cards-grid">
+        <a href="{{ url_for('index', status='all') }}">
         <div class="card">
-            <div class="card-title">Total Patients</div>
-            <div class="card-value">6</div>
+            <div class="card-title">Total Cases</div>
+            <div class="card-value">{{ total_cases }}</div>
         </div>
+        </a>
+        <a href="{{ url_for('index', status='in_progress') }}">
         <div class="card">
             <div class="card-title">In Progress</div>
-            <div class="card-value">4</div>
+            <div class="card-value">{{ in_progress }}</div>
         </div>
+        </a>
+        <a href="{{ url_for('index', status='completed') }}">
         <div class="card">
             <div class="card-title">Completed</div>
-            <div class="card-value">2</div>
+            <div class="card-value">{{ completed }}</div>
         </div>
+        </a>
      </section>
 
      <!-- Window that displays the table in a scroll-able format-->
@@ -48,21 +63,23 @@
         <table>
             <thead>
                 <tr>
-                    <th>Patient ID</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Progress</th>
-                    <th>Report status</th>
+                    <th>Case Number</th>
+                    <th>Patient Name</th>
+                    <th>Patient Surname</th>
+                    <th>Case Progress_%</th>
+                    <th>Report Status</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- before the use of flask and databases, static sample data is displayed -->
-                <tr>
-                    <td>1</td>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>25%</td>
-                    <td>Incomplete</td>
+                {% for c in cases %}
+                <tr class="clickable-row">
+                    <td><a href="{{ url_for('case_details', case_id=c.Case_id) }}">{{ c.Case_id }}</a></td>
+                    <td>{{ c.Patient_Name }}</td>
+                    <td>{{ c.Patient_Surname }}</td>
+                    <td>{{ c.Case_progress }}</td>
+                    <td>{{ c.Report_status }}</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
      </div>
