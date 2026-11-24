@@ -78,6 +78,10 @@ CaseFlow_Group30/
 
 The three html user interfaces are stored in the templates folder. They communicate with the static/style.css style sheet and also to app.py, which stores the Flask routes that link the user interface with the functions written in caseflow.py. This structure of files are also connected to schema.sql and seed.sql, which contain the database tables in which the cases reports and associated records are stored. 
 
+Here is a link to the ERD diagram describing the database, tables and their relationships.
+
+![App Database ERD Diagram](./erd_diagram/ERD_diagram.png)
+
 
 ## Sections
 
